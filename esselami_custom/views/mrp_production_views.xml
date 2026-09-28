@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_production_form_view_esselami" model="ir.ui.view">
+        <field name="name">mrp.production.form.esselami</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                <button name="action_create_purchase_from_shortage"
+                        type="object"
+                        string="Générer les achats manquants"
+                        class="btn-secondary"
+                        invisible="not esselami_has_shortage or state in ('done', 'cancel')"
+                        groups="purchase.group_purchase_user"/>
+            </xpath>
+
+            <xpath expr="//field[@name='move_raw_ids']" position="before">
+                <field name="esselami_has_shortage" invisible="1"/>
+                <div class="alert alert-warning" role="alert"
+                     invisible="not esselami_has_shortage">
+                    <span>Certains composants ne sont pas disponibles en stock :</span>
+                    <field name="esselami_missing_component_ids"
+                           widget="many2many_tags"
+                           readonly="1"
+                           nolabel="1"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
