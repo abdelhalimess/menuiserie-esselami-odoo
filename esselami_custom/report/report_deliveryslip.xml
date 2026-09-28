@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Référence commande et date d'installation sur le bon de livraison -->
+    <template id="report_deliveryslip_esselami"
+              inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_outgoing_address']" position="after">
+            <div class="col-auto" name="esselami_install_block">
+                <t t-set="sale_order" t-value="o.sale_id"/>
+                <div t-if="sale_order">
+                    <strong>Commande client :</strong>
+                    <span t-field="sale_order.name"/>
+                </div>
+                <div t-if="sale_order and sale_order.esselami_estimated_ship_date">
+                    <strong>Installation prévue :</strong>
+                    <span t-field="sale_order.esselami_estimated_ship_date"/>
+                </div>
+                <div t-if="sale_order and sale_order.client_order_ref">
+                    <strong>Votre référence :</strong>
+                    <span t-field="sale_order.client_order_ref"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

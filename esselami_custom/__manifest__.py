@@ -21,6 +21,7 @@
         "views/sale_order_views.xml",
         "views/mrp_production_views.xml",
         "views/res_config_settings_views.xml",
+        "report/report_deliveryslip.xml",
     ],
     "installable": True,
     "application": False,
