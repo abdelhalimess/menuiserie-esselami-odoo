@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Environnements / IDE
+.venv/
+venv/
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Odoo
+*.log
+filestore/
