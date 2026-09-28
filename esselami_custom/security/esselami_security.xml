@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="module_category_esselami" model="ir.module.category">
+            <field name="name">Menuiserie ESSELAMI</field>
+            <field name="sequence">90</field>
+        </record>
+
+        <!--
+            Un privilège par permission : les deux droits sont indépendants
+            et s'affichent en cases à cocher distinctes sur la fiche
+            utilisateur. Regroupés sous un même privilège, ils deviendraient
+            des niveaux exclusifs d'un seul droit.
+        -->
+        <record id="privilege_discount" model="res.groups.privilege">
+            <field name="name">Validation des remises</field>
+            <field name="sequence">10</field>
+            <field name="category_id" ref="module_category_esselami"/>
+        </record>
+
+        <record id="privilege_dashboard" model="res.groups.privilege">
+            <field name="name">Tableau de bord Direction</field>
+            <field name="sequence">20</field>
+            <field name="category_id" ref="module_category_esselami"/>
+        </record>
+
+        <!-- Qui peut valider une remise exceptionnelle -->
+        <record id="group_discount_approver" model="res.groups">
+            <field name="name">Validation des remises</field>
+            <field name="privilege_id" ref="privilege_discount"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+        </record>
+
+        <!-- Qui voit le tableau de bord Direction -->
+        <record id="group_manager_dashboard" model="res.groups">
+            <field name="name">Tableau de bord Direction</field>
+            <field name="privilege_id" ref="privilege_dashboard"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        </record>
+
+    </data>
+</odoo>
