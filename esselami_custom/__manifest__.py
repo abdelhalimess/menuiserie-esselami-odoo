@@ -21,8 +21,14 @@
         "views/sale_order_views.xml",
         "views/mrp_production_views.xml",
         "views/res_config_settings_views.xml",
+        "views/dashboard_views.xml",
         "report/report_deliveryslip.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "esselami_custom/static/src/dashboard/**/*",
+        ],
+    },
     "installable": True,
     "application": False,
 }

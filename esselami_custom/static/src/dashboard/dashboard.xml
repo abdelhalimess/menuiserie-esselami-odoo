@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="esselami_custom.Dashboard">
+        <Layout display="{ controlPanel: {} }" className="'o_esselami_dashboard'">
+            <t t-set-slot="control-panel-create-button">
+                <button class="btn btn-secondary" t-on-click="() => this.loadData()">
+                    Actualiser
+                </button>
+            </t>
+
+            <div class="o_esselami_dashboard_body p-4">
+                <div t-if="state.loading" class="text-center p-5">
+                    <span class="fa fa-circle-o-notch fa-spin fa-2x"/>
+                </div>
+
+                <div t-elif="state.error" class="alert alert-danger">
+                    <t t-esc="state.error"/>
+                </div>
+
+                <div t-else="" class="row g-3">
+                    <div t-foreach="state.cards" t-as="card" t-key="card.key"
+                         class="col-12 col-md-6 col-lg-4">
+                        <div class="o_esselami_card p-3 h-100"
+                             t-att-class="'o_tone_' + card.tone"
+                             t-on-click="() => this.onCardClick(card)">
+                            <div class="o_esselami_card_label text-muted">
+                                <t t-esc="card.label"/>
+                            </div>
+                            <div class="o_esselami_card_value">
+                                <t t-esc="formatValue(card)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    </t>
+
+</templates>

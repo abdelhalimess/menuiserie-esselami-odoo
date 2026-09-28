@@ -1,0 +1,33 @@
+.o_esselami_dashboard {
+    .o_esselami_card {
+        background-color: var(--o-white, #fff);
+        border: 1px solid var(--o-gray-300, #dee2e6);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: box-shadow 0.15s ease-in-out;
+
+        &:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .o_esselami_card_label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .o_esselami_card_value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        &.o_tone_danger .o_esselami_card_value {
+            color: var(--o-danger, #d9534f);
+        }
+
+        &.o_tone_warning .o_esselami_card_value {
+            color: var(--o-warning, #f0ad4e);
+        }
+    }
+}
