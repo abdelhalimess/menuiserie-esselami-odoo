@@ -7,8 +7,25 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
+            <xpath expr="//header/button[@name='action_confirm'][1]" position="before">
+                <button name="action_approve_discount"
+                        type="object"
+                        string="Valider la remise"
+                        class="btn-primary"
+                        invisible="state != 'to_approve'"
+                        groups="esselami_custom.group_discount_approver"/>
+                <button name="action_refuse_discount"
+                        type="object"
+                        string="Refuser la remise"
+                        invisible="state != 'to_approve'"
+                        groups="esselami_custom.group_discount_approver"/>
+            </xpath>
+
             <xpath expr="//field[@name='validity_date']" position="after">
                 <field name="esselami_estimated_ship_date"/>
+                <field name="esselami_max_discount"
+                       invisible="esselami_max_discount == 0"/>
+                <field name="esselami_discount_approved" invisible="1"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/list/field[@name='discount']"
@@ -26,6 +43,20 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='state']" position="before">
                 <field name="esselami_estimated_ship_date" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_esselami" model="ir.ui.view">
+        <field name="name">sale.order.search.esselami</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                <separator/>
+                <filter name="filter_to_approve"
+                        string="À valider"
+                        domain="[('state', '=', 'to_approve')]"/>
             </xpath>
         </field>
     </record>
