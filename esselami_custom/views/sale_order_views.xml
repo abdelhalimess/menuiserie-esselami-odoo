@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_esselami" model="ir.ui.view">
+        <field name="name">sale.order.form.esselami</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='validity_date']" position="after">
+                <field name="esselami_estimated_ship_date"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/list/field[@name='discount']"
+                   position="after">
+                <field name="esselami_lead_time_days" optional="show"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_quotation_tree_esselami" model="ir.ui.view">
+        <field name="name">sale.order.list.esselami</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="before">
+                <field name="esselami_estimated_ship_date" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
